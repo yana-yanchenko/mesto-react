@@ -9,12 +9,22 @@ const Main = ({onEditAvatar, onAddPlace, onEditProfile}) => {
 
   const [userAvatar, setUserAvatar] = useState(null)
 
+  const [cards, setCards] = useState([])
+
+React.useEffect(() =>{
+  
+})
+
 React.useEffect(() =>{
   api.getInfoUser()
   .then((data) => {
     setUserName(data.name)
     setUserDescription(data.about)
     setUserAvatar(data.avatar)
+  })
+  api.getInitialCards()
+  .then((data) =>{
+    setCards(data)
   })
 })
 
@@ -33,6 +43,21 @@ React.useEffect(() =>{
         <button className="profile__button-add" type="button" onClick={onAddPlace}/>
       </div>
       <section className="elements">
+        {
+          cards.map((card) =>
+            <div className="element" key={card._id}>
+              <button className="element__button-delete"></button>
+              <img className="element__image" src={card.link} alt={card.name}/>
+          <div className="element__description">
+            <h2 className="element__title">{card.name}</h2>
+            <div className="element__like">
+            <button className="element__button-like" type="button"></button>
+            <p className="element__count-like">{card.likes.length}</p>
+          </div>
+          </div>
+        </div>
+          )
+        }
       </section>
     </main>
   );
