@@ -13,7 +13,7 @@ const Main = (props) => {
           <button className="profile__button-edit" type="button" onClick={props.handlePopupProfile}/>
           <p className="profile__occupation">Исследователь океана</p>
         </div>
-        <button className="profile__button-add" type="button"/>
+        <button className="profile__button-add" type="button" onClick={props.handlePopupCard}/>
       </div>
       <section className="elements">
       </section>

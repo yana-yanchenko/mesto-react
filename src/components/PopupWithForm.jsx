@@ -20,7 +20,6 @@ React.useEffect(()=>{
         <h2 className="popup__title">{props.title}</h2>
         <form className="popup__form" name={props.name}>
           {props.children}
-          
           <button className="popup__button-keep" type="submit" name="keep" aria-label="Сохранить">{props.textButton}</button>
         </form>
         <button className="popup__button-close" type="button" name="close" aria-label="закрыть" onClick={props.onClose}/>
