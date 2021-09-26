@@ -1,7 +1,8 @@
 import React,{useState} from 'react';
 import {api} from '../utils/api'
+import Card from './Card'
 
-const Main = ({onEditAvatar, onAddPlace, onEditProfile}) => {
+const Main = ({onEditAvatar, onAddPlace, onEditProfile, cards, handleCardClick}) => {
 
   const [userName, setUserName] = useState('')
   
@@ -9,25 +10,15 @@ const Main = ({onEditAvatar, onAddPlace, onEditProfile}) => {
 
   const [userAvatar, setUserAvatar] = useState(null)
 
-  const [cards, setCards] = useState([])
-
-React.useEffect(() =>{
-  
-})
-
-React.useEffect(() =>{
-  api.getInfoUser()
-  .then((data) => {
-    setUserName(data.name)
-    setUserDescription(data.about)
-    setUserAvatar(data.avatar)
+  React.useEffect(() =>{
+    api.getInfoUser()
+    .then((data) => {
+      setUserName(data.name)
+      setUserDescription(data.about)
+      setUserAvatar(data.avatar)
+    })
   })
-  api.getInitialCards()
-  .then((data) =>{
-    setCards(data)
-  })
-})
-
+ 
   return (
     <main className="main">
       <div className="profile">
@@ -45,17 +36,7 @@ React.useEffect(() =>{
       <section className="elements">
         {
           cards.map((card) =>
-            <div className="element" key={card._id}>
-              <button className="element__button-delete"></button>
-              <img className="element__image" src={card.link} alt={card.name}/>
-          <div className="element__description">
-            <h2 className="element__title">{card.name}</h2>
-            <div className="element__like">
-            <button className="element__button-like" type="button"></button>
-            <p className="element__count-like">{card.likes.length}</p>
-          </div>
-          </div>
-        </div>
+           <Card card={card} key={card._id}/>
           )
         }
       </section>
