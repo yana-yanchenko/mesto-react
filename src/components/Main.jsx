@@ -2,12 +2,9 @@ import React,{useState} from 'react';
 import {api} from '../utils/api'
 import Card from './Card'
 
-const Main = ({onEditAvatar, onAddPlace, onEditProfile, cards, handleCardClick}) => {
-
+const Main = ({onEditAvatar, onAddPlace, onEditProfile, cards, onCardClick}) => {
   const [userName, setUserName] = useState('')
-  
   const [userDescription, setUserDescription] =  useState('')
-
   const [userAvatar, setUserAvatar] = useState(null)
 
   React.useEffect(() =>{
@@ -16,6 +13,9 @@ const Main = ({onEditAvatar, onAddPlace, onEditProfile, cards, handleCardClick})
       setUserName(data.name)
       setUserDescription(data.about)
       setUserAvatar(data.avatar)
+    })
+    .catch((err) =>{
+      console.log(err)
     })
   })
  
@@ -36,7 +36,7 @@ const Main = ({onEditAvatar, onAddPlace, onEditProfile, cards, handleCardClick})
       <section className="elements">
         {
           cards.map((card) =>
-           <Card card={card} key={card._id}/>
+           <Card card={card} key={card._id} onCardClick={onCardClick}/>
           )
         }
       </section>

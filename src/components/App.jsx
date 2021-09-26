@@ -32,6 +32,7 @@ function App() {
    const [selectedCard, setSelectedCard] = React.useState(null)
    const handleCardClick = (card) =>{
     setSelectedCard(card)
+    console.log(card);
    }
 
 
@@ -42,12 +43,15 @@ function App() {
     .then((data) =>{
       setCards(data)
     })
+    .catch((err) =>{
+      console.log(err)
+    })
   })
 
   return (
     <div className="page">
       <Header/>
-      <Main cards={cards} onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} handleCardClick={handleCardClick}/>
+      <Main cards={cards} onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick}/>
       <Footer/>
       <PopupWithForm name="profile" title="Редактировать профиль" textButton="Сохранить" isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}> 
         <input className="popup__input popup__input_value_name" name="name" type="text" id="profile-name" minLength="2" maxLength="40" value="Жак-Ив Кусто" required/>
@@ -63,10 +67,10 @@ function App() {
             required/>
             <span className="popup__input-error" id="card-link-error"></span>
     </PopupWithForm>
-    <PopupWithForm name="avatar" title="Обновить аватар" textButton="Сохранить" isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}>
-          <input className="popup__input popup__input_value_avatar" name="avatar" id="avatar" type="url" placeholder="Ссылка" required/>
-          <span className="popup__input-error" id="avatar-error"></span>
-    </PopupWithForm>
+      <PopupWithForm name="avatar" title="Обновить аватар" textButton="Сохранить" isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}>
+        <input className="popup__input popup__input_value_avatar" name="avatar" id="avatar" type="url" placeholder="Ссылка" required />
+        <span className="popup__input-error" id="avatar-error"></span>
+      </PopupWithForm>
     <ImagePopup card={selectedCard} onClose={closeAllPopups} />
     </div>
   );
