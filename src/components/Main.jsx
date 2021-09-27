@@ -17,7 +17,7 @@ const Main = ({onEditAvatar, onAddPlace, onEditProfile, cards, onCardClick}) => 
     .catch((err) =>{
       console.log(err)
     })
-  })
+  },[])
  
   return (
     <main className="main">
@@ -36,7 +36,7 @@ const Main = ({onEditAvatar, onAddPlace, onEditProfile, cards, onCardClick}) => 
       <section className="elements">
         {
           cards.map((card) =>
-           <Card card={card} key={card._id} onCardClick={onCardClick}/>
+           (<Card card={card} key={card._id} onCardClick={onCardClick}/>)
           )
         }
       </section>

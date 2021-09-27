@@ -4,7 +4,7 @@ const PopupWithForm = (props) => {
 React.useEffect(()=>{
   
   const handleEscapeClosePopup = (evt) =>{
-    if (evt.keyCode === 27){
+    if (evt.key === 'Escape'){
       props.onClose()
     }
   }

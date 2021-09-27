@@ -6,7 +6,6 @@ const Card = ({card, onCardClick}) => {
     onCardClick(card);
   }
   return (
-    <div>
        <div className="element">
               <button className="element__button-delete"></button>
               <img className="element__image" src={card.link} alt={card.name} onClick={handleClick}/>
@@ -18,7 +17,6 @@ const Card = ({card, onCardClick}) => {
           </div>
           </div>
         </div>
-    </div>
   );
 }
 
