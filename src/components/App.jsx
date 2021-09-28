@@ -3,7 +3,6 @@ import Header from './Header'
 import Main from './Main'
 import Footer from './Footer'
 import PopupWithForm from './PopupWithForm'
-import {api} from '../utils/api'
 import ImagePopup from './ImagePopup'
 
 function App() {
@@ -36,22 +35,12 @@ function App() {
    }
 
 
-  const [cards, setCards] = React.useState([])
-
-   React.useEffect(() =>{
-    api.getInitialCards()
-    .then((data) =>{
-      setCards(data)
-    })
-    .catch((err) =>{
-      console.log(err)
-    })
-  },[])
+  
 
   return (
     <div className="page">
       <Header/>
-      <Main cards={cards} onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick}/>
+      <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick}/>
       <Footer/>
       <PopupWithForm name="profile" title="Редактировать профиль" textButton="Сохранить" isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}> 
         <input className="popup__input popup__input_value_name" name="name" type="text" id="profile-name" minLength="2" maxLength="40" value="Жак-Ив Кусто" required/>

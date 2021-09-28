@@ -8,7 +8,7 @@ React.useEffect(()=>{
       props.onClose()
     }
   }
-  window.addEventListener('keydown', handleEscapeClosePopup)
+  props.isOpen && window.addEventListener('keydown', handleEscapeClosePopup)
   return () => {
     window.removeEventListener('keydown', handleEscapeClosePopup)
   }
@@ -20,7 +20,7 @@ React.useEffect(()=>{
         <h2 className="popup__title">{props.title}</h2>
         <form className={`popup__form popup__form_${props.name}`} name={props.name}>
           {props.children}
-          <button className="popup__button-keep" type="submit" name="keep" aria-label="Сохранить">{props.textButton}</button>
+          <button className="popup__button-save" type="submit" name="save" aria-label="Сохранить">{props.textButton}</button>
         </form>
         <button className="popup__button-close" type="button" name="close" aria-label="закрыть" onClick={props.onClose}/>
       </div>

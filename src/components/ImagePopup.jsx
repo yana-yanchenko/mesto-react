@@ -4,11 +4,11 @@ const ImagePopup = ({card, onClose}) => {
   React.useEffect(()=>{
   
     const handleEscapeClosePopup = (evt) =>{
-      if (evt.keyCode === 27){
+      if (evt.key === 'Escape'){
         onClose()
       }
     }
-    window.addEventListener('keydown', handleEscapeClosePopup)
+    card && window.addEventListener('keydown', handleEscapeClosePopup)
     return () => {
       window.removeEventListener('keydown', handleEscapeClosePopup)
     }

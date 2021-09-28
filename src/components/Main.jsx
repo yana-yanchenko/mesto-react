@@ -2,7 +2,7 @@ import React,{useState} from 'react';
 import {api} from '../utils/api'
 import Card from './Card'
 
-const Main = ({onEditAvatar, onAddPlace, onEditProfile, cards, onCardClick}) => {
+const Main = ({onEditAvatar, onAddPlace, onEditProfile, onCardClick}) => {
   const [userName, setUserName] = useState('')
   const [userDescription, setUserDescription] =  useState('')
   const [userAvatar, setUserAvatar] = useState(null)
@@ -19,6 +19,18 @@ const Main = ({onEditAvatar, onAddPlace, onEditProfile, cards, onCardClick}) => 
     })
   },[])
  
+  const [cards, setCards] = React.useState([])
+
+  React.useEffect(() =>{
+   api.getInitialCards()
+   .then((data) =>{
+     setCards(data)
+   })
+   .catch((err) =>{
+     console.log(err)
+   })
+ },[])
+
   return (
     <main className="main">
       <div className="profile">
