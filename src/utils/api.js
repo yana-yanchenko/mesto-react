@@ -11,12 +11,12 @@ export default class Api {
     return Promise.reject(`error - ${res.status}`);
   };
 
-  updateAvatar(avatar) {
+  updateAvatar(data) {
     return fetch(`${this._url}/users/me/avatar`, {
         method: 'PATCH',
         headers: this._headers,
         body: JSON.stringify({
-          avatar: avatar
+          avatar: data.avatar
         })
       })
       .then(this._responce)
@@ -38,46 +38,39 @@ export default class Api {
       .then(this._responce)
   }
 
-  setInfoUser(name, occupation, avatar) {
+  setInfoUser(data) {
     return fetch(`${this._url}/users/me`, {
         method: 'PATCH',
         headers: this._headers,
         body: JSON.stringify({
-          name: name,
-          about: occupation,
-          avatar: avatar
+          name: data.name,
+          about: data.about,
+          avatar: data.avatar
         })
       })
       .then(this._responce)
   }
 
-  generateNewCard(name, link) {
+  generateNewCard(data) {
     return fetch(`${this._url}/cards`, {
         method: 'POST',
         headers: this._headers,
         body: JSON.stringify({
-          name: name,
-          link: link
+          name: data.name,
+          link: data.link
         })
       })
       .then(this._responce)
   }
 
-  setLikeCard(id) {
+  changeLikeCardStatus(id, isLiked){
     return fetch(`${this._url}/cards/likes/${id}`, {
-        method: 'PUT',
-        headers: this._headers,
-      })
-      .then(this._responce)
+      method: isLiked ? 'PUT' : 'DELETE',
+      headers: this._headers,
+    })
+    .then(this._responce)
   }
-
-  removeLikeCard(id) {
-    return fetch(`${this._url}/cards/likes/${id}`, {
-        method: 'DELETE',
-        headers: this._headers,
-      })
-      .then(this._responce)
-  }
+  
   deleteCard(id){
     return fetch(`${this._url}/cards/${id}`,{
       method: 'DELETE',

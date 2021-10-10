@@ -18,7 +18,7 @@ React.useEffect(()=>{
       <div className={`popup popup_type_${props.name} ${ props.isOpen ? 'popup_opened' : '' }`} onClick={props.onClose}>
       <div className="popup__conteiner" onClick={(evt) =>{evt.stopPropagation()}}>
         <h2 className="popup__title">{props.title}</h2>
-        <form className={`popup__form popup__form_${props.name}`} name={props.name}>
+        <form className={`popup__form popup__form_${props.name}`} name={props.name} onSubmit={props.onSubmit}>
           {props.children}
           <button className="popup__button-save" type="submit" name="save" aria-label="Сохранить">{props.textButton}</button>
         </form>
