@@ -11,7 +11,6 @@ import AddPlacePopup from "./AddPlacePopup";
 
 function App() {
   const [cards, setCards] = React.useState([]);
-  // const [isCardDelete, setIsCsrdDelete] = React.useState(null)
 
   React.useEffect(() => {
     api
@@ -25,7 +24,6 @@ function App() {
   }, []);
 
   function handleCardDelete(card) {
-    const isOwn = card.owner._id === currentUser._id;
     api
       .deleteCard(card._id)
       .then(() => {
