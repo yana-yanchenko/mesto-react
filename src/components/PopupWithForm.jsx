@@ -13,9 +13,9 @@ React.useEffect(()=>{
     window.removeEventListener('keydown', handleEscapeClosePopup)
   }
 },[props])
-
+  const popusFormClassName = `popup popup_type_${props.name} ${ props.isOpen ? 'popup_opened' : '' }`;
   return (
-      <div className={`popup popup_type_${props.name} ${ props.isOpen ? 'popup_opened' : '' }`} onClick={props.onClose}>
+      <div className={popusFormClassName} onClick={props.onClose}>
       <div className="popup__conteiner" onClick={(evt) =>{evt.stopPropagation()}}>
         <h2 className="popup__title">{props.title}</h2>
         <form className={`popup__form popup__form_${props.name}`} name={props.name} onSubmit={props.onSubmit}>

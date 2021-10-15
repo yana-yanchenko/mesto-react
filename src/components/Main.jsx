@@ -5,22 +5,11 @@ import { CurrentUserContext } from "../context/CurrentUserContext";
 const Main = (props) => {
   const currentUser = React.useContext(CurrentUserContext);
 
-  const onEditAvatar = () => {
-    props.onEditAvatar(props.onClick);
-  };
-
-  const onEditProfile = () => {
-    props.onEditProfile(props.onClick);
-  };
-
-  const onAddPlace = () => {
-    props.onAddPlace(props.onClick);
-  };
-
+  
   return (
     <main className="main">
       <div className="profile">
-        <div className="profile__box-avatar" onClick={onEditAvatar}>
+        <div className="profile__box-avatar" onClick={props.onEditAvatar}>
           <img
             className="profile__avatar"
             src={currentUser.avatar}
@@ -33,14 +22,14 @@ const Main = (props) => {
           <button
             className="profile__button-edit"
             type="button"
-            onClick={onEditProfile}
+            onClick={props.onEditProfile}
           />
           <p className="profile__occupation">{currentUser.about}</p>
         </div>
         <button
           className="profile__button-add"
           type="button"
-          onClick={onAddPlace}
+          onClick={props.onAddPlace}
         />
       </div>
       <section className="elements">

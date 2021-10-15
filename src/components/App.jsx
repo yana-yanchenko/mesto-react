@@ -11,6 +11,13 @@ import AddPlacePopup from "./AddPlacePopup";
 
 function App() {
   const [cards, setCards] = React.useState([]);
+  const [currentUser, setCurrentUser] = React.useState({});
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
+    React.useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
+    React.useState(false);
+  const [selectedCard, setSelectedCard] = React.useState(null);
 
   React.useEffect(() => {
     api
@@ -41,7 +48,6 @@ function App() {
     });
   }
 
-  const [currentUser, setCurrentUser] = React.useState({});
   React.useEffect(() => {
     api
       .getInfoUser()
@@ -53,8 +59,6 @@ function App() {
       });
   }, []);
 
-  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
-    React.useState(false);
   const handleEditProfileClick = () => {
     setIsEditProfilePopupOpen(true);
   };
@@ -65,18 +69,14 @@ function App() {
     setSelectedCard(null);
   };
 
-  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const handleAddPlaceClick = () => {
     setIsAddPlacePopupOpen(true);
   };
 
-  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
-    React.useState(false);
   const handleEditAvatarClick = () => {
     setIsEditAvatarPopupOpen(true);
   };
 
-  const [selectedCard, setSelectedCard] = React.useState(null);
   const handleCardClick = (card) => {
     setSelectedCard(card);
   };
@@ -105,11 +105,15 @@ function App() {
   };
 
   const handleAddPlaceSubmit = (newCard) => {
-    console.log(newCard);
-    api.generateNewCard(newCard).then((data) => {
-      setCards([data, ...cards]);
-      closeAllPopups()
-    });
+    api
+      .generateNewCard(newCard)
+      .then((data) => {
+        setCards([data, ...cards]);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (

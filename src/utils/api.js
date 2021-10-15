@@ -4,7 +4,7 @@ export default class Api {
     this._headers = options.headers;
   }
 
-  _responce(res) {
+  _response(res) {
     if (res.ok) {
       return res.json();
     }
@@ -19,7 +19,7 @@ export default class Api {
           avatar: data.avatar
         })
       })
-      .then(this._responce)
+      .then(this._response)
   }
 
   getInitialCards() {
@@ -27,7 +27,7 @@ export default class Api {
         method: 'GET',
         headers: this._headers
       })
-      .then(this._responce)
+      .then(this._response)
   }
 
   getInfoUser() {
@@ -35,7 +35,7 @@ export default class Api {
         method: 'GET',
         headers: this._headers
       })
-      .then(this._responce)
+      .then(this._response)
   }
 
   setInfoUser(data) {
@@ -48,7 +48,7 @@ export default class Api {
           avatar: data.avatar
         })
       })
-      .then(this._responce)
+      .then(this._response)
   }
 
   generateNewCard(data) {
@@ -60,7 +60,7 @@ export default class Api {
           link: data.link
         })
       })
-      .then(this._responce)
+      .then(this._response)
   }
 
   changeLikeCardStatus(id, isLiked){
@@ -68,7 +68,7 @@ export default class Api {
       method: isLiked ? 'PUT' : 'DELETE',
       headers: this._headers,
     })
-    .then(this._responce)
+    .then(this._response)
   }
   
   deleteCard(id){
@@ -76,14 +76,14 @@ export default class Api {
       method: 'DELETE',
       headers: this._headers,
     })
-    .then(this._responce)
+    .then(this._response)
   }
 }
 
 export const api = new Api({
   url: 'https://mesto.nomoreparties.co/v1/cohort-27',
   headers: {
-    "content-type": "application/json",
+    "Content-Type": "application/json",
     authorization: "2c65705e-3be3-4e0a-bdee-8f09d7a37648",
   }
 })
